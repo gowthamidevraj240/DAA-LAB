@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void merge(char arr[][12], int left, int middle, int right) {
+    int i, j, k;
+    int n1 = middle - left + 1;
+    int n2 = right - middle;
+
+    char L[n1][12], R[n2][12];
+
+    for (i = 0; i < n1; i++)
+        strcpy(L[i], arr[left + i]);
+    for (j = 0; j < n2; j++)
+        strcpy(R[j], arr[middle + 1 + j]);
+
+    i = 0;
+    j = 0;
+    k = left;
+
+    while (i < n1 && j < n2) {
+        if (strcmp(L[i], R[j]) <= 0) {
+            strcpy(arr[k], L[i]);
+            i++;
+        } else {
+            strcpy(arr[k], R[j]);
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        strcpy(arr[k], L[i]);
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        strcpy(arr[k], R[j]);
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(char arr[][12], int left, int right) {
+    if (left < right) {
+        int middle = left + (right - left) / 2;
+
+        mergeSort(arr, left, middle);
+        mergeSort(arr, middle + 1, right);
+
+        merge(arr, left, middle, right);
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter the number of mobile numbers: ");
+    scanf("%d", &n);
+
+    char numbers[n][12];
+    for (int i = 0; i < n; i++) {
+        printf("Enter mobile number %d: ", i + 1);
+        scanf("%s", numbers[i]);
+    }
+
+    mergeSort(numbers, 0, n - 1);
+
+    printf("Sorted mobile numbers:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%s\n", numbers[i]);
+    }
+
+    return 0;
+}
