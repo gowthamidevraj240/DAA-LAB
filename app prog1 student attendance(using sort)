@@ -1,3 +1,12 @@
+PROBLEM STATEMENT: An attendance register is commonly used to keep track of students'
+presence in a class or an event. Sorting the names in the attendance
+register alphabetically is essential for easy access and analysis. The
+task is to develop a program that takes a list of names in an
+attendance register as input and sorts them alphabetically using the
+quick sort algorithm. The program should read the names from a file
+or accept user input, sort them, and display the sorted list of names.
+
+
 #include<stdio.h>
 #include<string.h>
 
